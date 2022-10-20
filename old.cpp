@@ -3,11 +3,24 @@
 using namespace std;
 
 // TASK 1 CLASSES - ***********************************
-template<class T>
+template<class S>
 class Node
 {
-    T *data;
-    Node<T> *next;
+    S *data;
+    Node *next;
+
+public:
+    // setter for data
+    void setData(T* item)
+    {
+        this->data = item;
+    }
+
+    // getter for data
+    void getData(T item)
+    {
+        return this->data;
+    }
 };
 
 template<class T>
@@ -44,7 +57,7 @@ public:
         return out;
     }
 
-    // T* SeeNext(int i); 
+    T* SeeNext(int i); 
    
     // Return if item is in list
     bool IsInList(Node<T> input);
@@ -204,46 +217,46 @@ Ordered_Link_List<T>& Ordered_Link_List<T>::operator+=(T *data)
 
 // GetItem - Searches for item and removes it if found and 
 // returns it using operator '-='
-// template<class T>
-// Ordered_Link_List<T>& Ordered_Link_List<T>::operator-=(T *data)
-// {
-//     // check if size of list is 0
-//     if (size == 0){
-//         return *this;
-//     }
+template<class T>
+Ordered_Link_List<T>& Ordered_Link_List<T>::operator-=(T *data)
+{
+    // check if size of list is 0
+    if (size == 0){
+        return *this;
+    }
 
-//     // Set temp head and prev for traversal
-//     Node<T> *temp = head;
-//     Node<T> *prev = NULL;
+    // Set temp head and prev for traversal
+    Node<T> *temp = head;
+    Node<T> *prev = NULL;
 
-//     // update temp as I traverse the list. Check if data is found
-//     // and replace it if so. Return out
-//     while (temp != NULL)
-//     {
-//         if (data == temp->data)
-//         {
-//             if (prev == NULL)
-//             {
-//                 head = head->next;
-//                 size--;
+    // update temp as I traverse the list. Check if data is found
+    // and replace it if so. Return out
+    while (temp != NULL)
+    {
+        if (data == temp->data)
+        {
+            if (prev == NULL)
+            {
+                head = head->next;
+                size--;
 
-//                 delete temp;
+                delete temp;
 
-//                 return *this;
-//             }
+                return *this;
+            }
 
-//             prev->next = temp->next;
-//             delete temp;
-//             size--;
+            prev->next = temp->next;
+            delete temp;
+            size--;
 
-//             return *this;
-//         }
-//         prev = temp;
-//         temp = temp->next;
-//     }
+            return *this;
+        }
+        prev = temp;
+        temp = temp->next;
+    }
 
-//     return *this;
-// }
+    return *this;
+}
 
 // SeeAt - Returns if item is in list at index i
 template<class T>
@@ -255,45 +268,45 @@ T* Ordered_Link_List<T>::operator[](int i){
     return foundItem;
 }
 
-// template<class T>
-// T* Ordered_Link_List<T>::SeeNext(int i)
-// {
-//     // Check if list is empty
-//     // if (IsEmpty(head))
-//     // {
-//     //     cout << "ERROR: List is empty." << endl;
-//     //     return NULL;
-//     //     // return;
-//     // }
+template<class T>
+T* Ordered_Link_List<T>::SeeNext(int i)
+{
+    // Check if list is empty
+    // if (IsEmpty(head))
+    // {
+    //     cout << "ERROR: List is empty." << endl;
+    //     return NULL;
+    //     // return;
+    // }
 
-//     // Throw error and return NULL if item is 
-//     // outside of list size or negative
-//     if (i < 0 && i >= size)
-//     {
-//         cout << "ERROR: Index is not in range of list." << endl;
-//         return NULL;
-//         // return;
-//     }
+    // Throw error and return NULL if item is 
+    // outside of list size or negative
+    if (i < 0 && i >= size)
+    {
+        cout << "ERROR: Index is not in range of list." << endl;
+        return NULL;
+        // return;
+    }
 
-//     T *tmp = NULL;
-//     Node<T> *temp = head;
+    T *tmp = NULL;
+    Node<T> *temp = head;
 
-//     // Return node at position next of index 'i'
-//     for (int j = 0; j <= i; j++)
-//     {
-//         if (temp->next == NULL)
-//         {
-//             return NULL;
-//             // return;
-//         }
-//         temp = temp->next;
-//     }
-//     tmp = temp->data;
+    // Return node at position next of index 'i'
+    for (int j = 0; j <= i; j++)
+    {
+        if (temp->next == NULL)
+        {
+            return NULL;
+            // return;
+        }
+        temp = temp->next;
+    }
+    tmp = temp->data;
 
-//     // return found item
-//     return tmp;
-//     // cout << tmp;
-// }
+    // return found item
+    return tmp;
+    // cout << tmp;
+}
 
 // IsInList - Return true if node is in list (by checking data)
 template<class T>
@@ -371,6 +384,7 @@ int main(void)
         {
             cin >> gpa; 
             Student newStudent(fName, lName, mNum, bDay, gpa);
+            testList.
         }
         else if (ans == 'N') 
         {
